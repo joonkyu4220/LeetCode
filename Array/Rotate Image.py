@@ -6,23 +6,19 @@ class Solution(object):
         """
         n = len(matrix)
         if n % 2 == 0:
-            m = 0
+            m = 2
         else:
-            m = 1
+            m = 3
         
         while (len(matrix) - m) >= 0:
-            if m <= 1:
-                m += 2
-                continue
-            else:
-                cur = (n - m) / 2
-                for j in range(m-1):
-                    matrix[cur + j][-1 - cur], matrix[-1 - cur][-1 - cur - j],\
-                    matrix[-1 - cur - j][cur], matrix[cur][cur + j]\
-                    = \
-                    matrix[cur][cur + j], matrix[cur + j][-1 - cur],\
-                    matrix[-1 - cur][-1 - cur - j], matrix[-1 - cur - j][cur]
-                m += 2                
+            cur = (n - m) / 2
+            for j in range(m-1):
+                matrix[cur + j][-1 - cur], matrix[-1 - cur][-1 - cur - j],\
+                matrix[-1 - cur - j][cur], matrix[cur][cur + j]\
+                = \
+                matrix[cur][cur + j], matrix[cur + j][-1 - cur],\
+                matrix[-1 - cur][-1 - cur - j], matrix[-1 - cur - j][cur]
+            m += 2
                 
             
             
