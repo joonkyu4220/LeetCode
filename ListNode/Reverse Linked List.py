@@ -6,13 +6,13 @@
 class Solution(object):
     def __init__(self):
         self.head = None
-    def recursive(self, prev_, cur_):
-        if not(cur_.next):
-            self.head = cur_
+    def recursive(self, prev_):
+        if not(prev_.next.next):
+            self.head = prev_.next
             prev_.next.next = prev_
             prev_.next = None
         else:
-            self.recursive(cur_, cur_.next)
+            self.recursive(prev_.next)
             prev_.next.next = prev_
             prev_.next = None
     
@@ -20,10 +20,12 @@ class Solution(object):
         
         if (head == None or head.next == None):
             return head
-        self.recursive(head, head.next)
+        self.recursive(head)
         return self.head
         
         
+        # if (head == None or head.next == None):
+        #     return head
         # p = self.reverseList(head.next)
         # head.next.next = head
         # head.next = None
@@ -37,6 +39,3 @@ class Solution(object):
         #     prev_ = cur_
         #     cur_ = next_
         # return prev_
-        
-        
-            
