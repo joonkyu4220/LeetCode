@@ -10,59 +10,57 @@ class Solution(object):
         :type root: TreeNode
         :rtype: bool
         """
-        
-        if not(root):
-            return True
-        elif not(root.left) and not(root.right):
+        if self.maxVal(root)[0] and self.minVal(root)[0]:
             return True
         else:
-            leftMax = self.maxVal(root.left)
-            rightMin = self.minVal(root.right)
-            
-            if self.isValidBST(root.left) and self.isValidBST(root.right):
-                
-                if leftMax is not None:
-                    if leftMax < root.val:
-                        if rightMin is not None:
-                            if root.val < rightMin:
-                                return True
-                            else:
-                                return False
-                        else:
-                            return True
-                    else:
-                        return False
-                            
-                else:
-                    if rightMin is not None:
-                        if root.val < rightMin:
-                            return True
-                        else:
-                            return False
-            else:
-                return False
-            
+            return False
     
     def maxVal(self, root):
         if not(root):
-            return None
+            return (True, None)
         elif not(root.left) and not(root.right):
-            return root.val
+            return (True, root.val)
         elif not(root.left):
-            return max(root.val, self.maxVal(root.right))
+            rightMax = self.maxVal(root.right)
+            if rightMax[0] and rightMax[1] > root.val:
+                return (True, rightMax[1])
+            else:
+                return (False, None)
         elif not(root.right):
-            return max(root.val, self.maxVal(root.left))
+            leftMax = self.maxVal(root.left)
+            if leftMax[0] and leftMax[1] < root.val:
+                return (True, root.val)
+            else:
+                return (False, None)
         else:
-            return max(root.val, self.maxVal(root.left), self.maxVal(root.right))
+            rightMax = self.maxVal(root.right)
+            leftMax = self.maxVal(root.left)
+            if rightMax[0] and leftMax[0] and leftMax[1] < root.val < rightMax[1]:
+                return (True, rightMax[1])
+            else:
+                return (False, None)
     
     def minVal(self, root):
         if not(root):
-            return None
+            return (True, None)
         elif not(root.left) and not(root.right):
-            return root.val
+            return (True, root.val)
         elif not(root.left):
-            return min(root.val, self.minVal(root.right))
+            rightMin = self.minVal(root.right)
+            if rightMin[0] and rightMin[1] > root.val:
+                return (True, root.val)
+            else:
+                return (False, None)
         elif not(root.right):
-            return min(root.val, self.minVal(root.left))
+            leftMin = self.minVal(root.left)
+            if leftMin[0] and leftMin[1] < root.val:
+                return (True, leftMin[1])
+            else:
+                return (False, None)
         else:
-            return min(root.val, self.minVal(root.left), self.minVal(root.right))
+            rightMin = self.minVal(root.right)
+            leftMin = self.minVal(root.left)
+            if rightMin[0] and leftMin[0] and leftMin[1] < root.val < rightMin[1]:
+                return (True, leftMin[1])
+            else:
+                return (False, None)
