@@ -11,7 +11,7 @@ class Solution(object):
         prev = 1
         cur = 2
         i = 2
-        while i < n:
+        while i < n-1:
             prev, cur = cur, prev+cur
             i += 1
-        return cur
+        return prev + cur
