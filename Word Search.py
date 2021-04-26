@@ -22,6 +22,7 @@ class Solution(object):
                 helper(board, check, word[1:], numRow, numCol, startR+1, startC)
                 helper(board, check, word[1:], numRow, numCol, startR, startC-1)
                 helper(board, check, word[1:], numRow, numCol, startR, startC+1)
+                check[startR][startC] = 1
         
         numRow = len(board)
         numCol = len(board[0])
